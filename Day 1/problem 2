@@ -1,0 +1,76 @@
+You are also given an array `cost`, where `cost[i]` represents the gas required to travel from station `i` to station `(i + 1)`.
+You have an unlimited-capacity car and start with an empty tank.
+Return the **index of the station from which you can start** and complete the entire circular route exactly once.
+If it is impossible, return `-1`.
+
+### Example
+
+```
+```
+
+```
+gas  =  [1, 2, 3, 4, 5]
+cost =  [3, 4, 5, 1, 2]
+
+Output: 3
+
+build a code structure to write solution
+
+```
+
+import java.util.*;
+
+public class Main {
+
+    public static int canCompleteCircuit(int[] gas, int[] cost) {
+        int n = gas.length;
+        int tank = 0;
+        int start = -1;
+        int totcost =0;
+        int totaltgas = 0;
+        for(int i=0; i<n; i++){
+            totcost += cost[i];
+            totaltgas += gas[i];
+            tank += gas[i];
+            int diff = tank - cost[i];
+            
+            tank = tank - cost[i];
+            if(start == -1 && diff >=0){
+              
+              start = i;
+            }
+            if(diff < 0){
+              tank = 0;
+              start = i+1;
+            }
+            
+        }
+        return totaltgas >= totcost ? start : -1;
+        
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input
+        int n = sc.nextInt();
+
+        int[] gas = new int[n];
+        int[] cost = new int[n];
+
+        // Read gas
+        for (int i = 0; i < n; i++) {
+            gas[i] = sc.nextInt();
+        }
+
+        // Read cost
+        for (int i = 0; i < n; i++) {
+            cost[i] = sc.nextInt();
+        }
+
+        // Function call
+        System.out.println(canCompleteCircuit(gas, cost));
+
+        sc.close();
+    }
+}
