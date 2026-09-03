@@ -1,0 +1,65 @@
+💻 DSA — Problem 3
+
+Given a string s, find the length of the longest substring that contains no repeated characters.
+
+Example
+Input:  "abcabcbb"
+Output: 3
+
+Because:
+
+"abc"
+
+is the longest substring without repetition.
+
+Another example:
+
+Input: "pwwkew"
+Output: 3
+Constraints
+0 <= s.length <= 100000
+
+import java.util.*;
+
+public class Main {
+
+    public static int lengthOfLongestSubstring(String s) {
+        HashSet<Character> set = new HashSet<>();
+        int maxlen = 0;
+        
+        int left =0;
+        for(int i=0; i<s.length(); i++){
+          while(set.contains(i)){
+            set.remove(left);
+            left++;
+          }
+          set.add(s.charAt(i));
+            
+            
+             
+              
+              maxlen = Math.max(maxlen, i - left+1);
+              
+            }
+            
+            
+        }
+
+        return maxlen;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Input
+        String s = sc.nextLine();
+
+        // Function call
+        int result = lengthOfLongestSubstring(s);
+
+        System.out.println(result);
+
+        sc.close();
+    }
+}
